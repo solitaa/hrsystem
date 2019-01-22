@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\EmployeeType;
+use App\Company;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $employeeTypes = Company::find(1)->employeeTypes;
+        $employeeTypesDefault = EmployeeType::whereNull('company_id')->get();
+
+        
+        $user = auth()->user();
+        return view('home')->with( [
+            'user'=> $user,
+            'employeeTypes' => $employeeTypes,
+            'employeeTypesDefault' => $employeeTypesDefault,
+        ]);
     }
 }
