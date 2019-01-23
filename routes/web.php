@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::put('/user/update', function(Illuminate\Http\Request $request){
+    var_dump($request);
+});
+Route::put('/user/update', 'UserController@updateProfile');
+//Route::resource('user', 'UserController')->except(['destroy']);
+
