@@ -22,10 +22,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
 
             $table->string('work_email')->nullable();
+            $table->string('send_emails_to')->nullable();
+            $table->string('username')->nullable();
             $table->string('start_date')->nullable();
             $table->integer('employee_type_id')->nullable();//full time or part tyme etc
             $table->date('date_of_birth')->nullable();
-            $table->string('gender', 10)->nullable();
+            $table->string('gender', 10)->default(0);
             $table->string('address')->nullable();
             $table->string('address_2')->nullable();
             $table->string('phone_number')->nullable();

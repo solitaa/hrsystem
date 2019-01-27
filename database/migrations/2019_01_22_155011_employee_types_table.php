@@ -16,7 +16,7 @@ class EmployeeTypesTable extends Migration
         Schema::create('employee_types', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->nullable();
-            $table->string('employee_type_name');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +28,7 @@ class EmployeeTypesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('employee_types');
+
     }
 }

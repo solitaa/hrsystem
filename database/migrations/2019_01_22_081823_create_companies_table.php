@@ -15,9 +15,11 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('company_name');
-            $table->string('company_phone_numbeer');
-            $table->string('company_size');
+            $table->string('name');
+            $table->string('user_id');
+            $table->string('phone_number')->nullable();
+            $table->string('size');
+            $table->string('slug');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company');
+        Schema::dropIfExists('companies');
     }
 }

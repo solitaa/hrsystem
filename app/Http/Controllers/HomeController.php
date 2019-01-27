@@ -25,15 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $employeeTypes = Company::find(1)->employeeTypes;
-        $employeeTypesDefault = EmployeeType::whereNull('company_id')->get();
 
-        
-        $user = auth()->user();
-        return view('home')->with( [
-            'user'=> $user,
-            'employeeTypes' => $employeeTypes,
-            'employeeTypesDefault' => $employeeTypesDefault,
-        ]);
     }
 }

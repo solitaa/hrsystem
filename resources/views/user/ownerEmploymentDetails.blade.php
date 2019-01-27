@@ -12,13 +12,13 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="employee_type">{{ __('Employee Type') }}</label>
-                    <select id="employee_type" name="employee_type" class="form-control">
-                        <option value="">Select</option>
+                    <select id="employee_type" name="employee_type_id" class="form-control">
+                        <option {{ $user->employee_type_id == 0 ? 'selected' : '' }} value="0">Select</option>
                         @foreach($employeeTypesDefault as $employeeType)
-                            <option {{ $employeeType->id == $user->employee_type_id ? 'selected' : '' }} value="{{$employeeType->id}}">{{$employeeType->employee_type_name}}</option>
+                            <option {{ $employeeType->id == $user->employee_type_id ? 'selected' : '' }} value="{{$employeeType->id}}">{{$employeeType->name}}</option>
                         @endforeach
                         @foreach($employeeTypes as $employeeType)
-                            <option {{ $employeeType->id == $user->employee_type_id ? 'selected' : '' }} value="{{$employeeType->id}}">{{$employeeType->employee_type_name}}</option>
+                            <option {{ $employeeType->id == $user->employee_type_id ? 'selected' : '' }} value="{{$employeeType->id}}">{{$employeeType->name}}</option>
                         @endforeach
                     </select>
                 </div>

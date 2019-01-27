@@ -14,13 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::put('/user/update', function(Illuminate\Http\Request $request){
-    var_dump($request);
-});
-Route::put('/user/update', 'UserController@updateProfile');
-//Route::resource('user', 'UserController')->except(['destroy']);
+//Route::get('/home', 'HomeController@index')->name('home');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/details', 'UserController@index')->name('user.details');
+    Route::post('/user/update', 'UserController@updateProfile')->name('user.update');
+
+
+    Route::get('/company/details', 'CompanyController@index')->name('company.details');
+    Route::post('/company/details/update', 'CompanyController@update')->name('company.details.update');
+
+
+
+});

@@ -22,9 +22,9 @@
                 <div class="form-group col-md-6">
                     <label for="gender">{{ __('Gender') }}</label>
                     <select id="gender" name="gender" class="form-control">
-                        <option value="">Select</option>
-                        <option value="male" >Male</option>
-                        <option value="female" >Female</option>
+                        <option {{ $user->gender == 0 ? 'selected' : '' }} value="0">Select</option>
+                        <option {{ $user->gender == 'male' ? 'selected' : '' }} value="male" >Male</option>
+                        <option {{ $user->gender == 'female' ? 'selected' : '' }} value="female" >Female</option>
                     </select>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <input type="text" class="form-control" id="city"  name="city" value="{{ $user->city }}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="state">{{ __('State/Province') }}</label>
+                    <label for="state">{{ __('State') }}</label>
                     <input type="text" class="form-control" id="state"  name="state" value="{{ $user->state }}">
                 </div>
                 <div class="form-group col-md-2">

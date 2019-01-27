@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 25, 2019 at 01:19 PM
--- Server version: 5.7.23
--- PHP Version: 7.2.10
+-- Generation Time: Jan 27, 2019 at 11:11 PM
+-- Server version: 5.7.19
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,9 +31,11 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `companies`;
 CREATE TABLE IF NOT EXISTS `companies` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `company_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_phone_numbeer` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_size` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -43,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `companies` (
 -- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`id`, `company_name`, `company_phone_numbeer`, `company_size`, `created_at`, `updated_at`) VALUES
-(1, 'Acompany', '11111111111111', '11-20', NULL, NULL);
+INSERT INTO `companies` (`id`, `name`, `user_id`, `phone_number`, `size`, `slug`, `created_at`, `updated_at`) VALUES
+(1, 'First companya', '1', 'xaa', '26-50', 'first-company', '2019-01-26 22:21:40', '2019-01-27 11:16:42');
 
 -- --------------------------------------------------------
 
@@ -56,23 +58,22 @@ DROP TABLE IF EXISTS `employee_types`;
 CREATE TABLE IF NOT EXISTS `employee_types` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `company_id` int(11) DEFAULT NULL,
-  `employee_type_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `employee_types`
 --
 
-INSERT INTO `employee_types` (`id`, `company_id`, `employee_type_name`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Full-time', '2019-01-22 13:07:03', '2019-01-22 13:07:03'),
-(2, NULL, 'Part-time', '2019-01-22 13:07:03', '2019-01-22 13:07:03'),
-(3, 1, 'Contractor', '2019-01-22 13:19:04', '2019-01-22 13:19:04'),
-(4, 2, 'Intern', '2019-01-22 13:19:24', '2019-01-22 13:19:24'),
-(5, 1, 'Contractor1', '2019-01-22 13:19:04', '2019-01-22 13:19:04'),
-(6, 1, 'Contractor2', '2019-01-22 13:19:04', '2019-01-22 13:19:04');
+INSERT INTO `employee_types` (`id`, `company_id`, `name`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Full-time', '2019-01-26 22:21:40', '2019-01-26 22:21:40'),
+(2, NULL, 'Part-time', '2019-01-26 22:21:40', '2019-01-26 22:21:40'),
+(3, 1, 'Other type 1', '2019-01-26 22:21:40', '2019-01-26 22:21:40'),
+(4, 1, 'Other type 2', '2019-01-26 22:21:40', '2019-01-26 22:21:40'),
+(5, 1, 'Other type 3', '2019-01-26 22:21:40', '2019-01-26 22:21:40');
 
 -- --------------------------------------------------------
 
@@ -86,17 +87,17 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(5, '2014_10_12_000000_create_users_table', 3),
-(2, '2014_10_12_100000_create_password_resets_table', 2),
-(3, '2019_01_22_081823_create_companies_table', 2),
-(4, '2019_01_22_155011_employee_types_table', 2);
+(37, '2014_10_12_000000_create_users_table', 1),
+(38, '2014_10_12_100000_create_password_resets_table', 1),
+(39, '2019_01_22_081823_create_companies_table', 1),
+(40, '2019_01_22_155011_employee_types_table', 1);
 
 -- --------------------------------------------------------
 
@@ -127,6 +128,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `work_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `send_emails_to` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `start_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `employee_type_id` int(11) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
@@ -154,8 +157,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `last_name`, `password`, `email`, `email_verified_at`, `work_email`, `start_date`, `employee_type_id`, `date_of_birth`, `gender`, `address`, `address_2`, `phone_number`, `office_phone_number`, `country`, `city`, `state`, `postal_code`, `profile_image`, `biography`, `salary`, `terms`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Arevaaaaa', 'Arevyan', '$2y$10$1GmUUomtej28Fjhtx/LWw.QEUjU2GRra/XZhQYEDZgThnBkveEKpC', 'arev@gmail.com', NULL, 'arevwork@gmail.com', '2019-01-22', NULL, '2094-05-09', 'male', 'Avan', NULL, '123 456', '123', 'Armenia', 'Yerevan', NULL, '0063', NULL, NULL, NULL, NULL, NULL, '2019-01-23 01:40:14', '2019-01-24 01:20:52');
+INSERT INTO `users` (`id`, `name`, `last_name`, `password`, `email`, `email_verified_at`, `work_email`, `send_emails_to`, `username`, `start_date`, `employee_type_id`, `date_of_birth`, `gender`, `address`, `address_2`, `phone_number`, `office_phone_number`, `country`, `city`, `state`, `postal_code`, `profile_image`, `biography`, `salary`, `terms`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Arev', 'Arevyan', '$2y$10$AV2TDMws5XIFdbvJZRUxyeApyy9xxujcxfgvj87HKApZcfNHk.ssa', 'arev@gmail.com', NULL, 'arevwork@gmail.com', 'arevwork@gmail.com', 'editor', '2019-01-01', 4, '2019-01-25', 'female', 'dfsfs', 'fdsfdsfs', '123 456', '123', 'Armenia', 'Yervan', 'dfdf', '0063', NULL, NULL, NULL, NULL, '8RkTfKxKxCSHiZTDstnsgEFb04p8VvurlcCI3DacEHvPpucszpdo0TjAGtxF', '2019-01-26 22:21:40', '2019-01-26 23:22:04');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -32,7 +32,12 @@
                 <div class="form-group col-md-6">
                     <label for="send_emails_to">{{ __('Send Emails to') }}</label>
                     <select id="send_emails_to" name="send_emails_to" class="form-control">
-                            <option value="">Select</option>
+                        @if (!empty($user->email))
+                            <option {{ $user->email == $user->send_emails_to ? ' selected' : '' }} value="email">{{ $user->email }}</option>
+                        @endif
+                        @if (!empty($user->work_email))
+                            <option {{ $user->work_email == $user->send_emails_to ? ' selected' : '' }} value="work_email">{{ $user->work_email }}</option>
+                        @endif
                     </select>
                 </div>
             </div>
