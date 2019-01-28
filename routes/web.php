@@ -26,6 +26,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/company/details', 'CompanyController@index')->name('company.details');
     Route::post('/company/details/update', 'CompanyController@update')->name('company.details.update');
 
+    Route::get('/employees', 'EmployeeController@index')->name('employees');
+    Route::get('/employee/create', 'EmployeeController@create')->name('employee.create');
+    Route::post('/employee/store', 'EmployeeController@store')->name('employee.store');
 
+    Route::get('/user/profile/{id}', 'UserController@profile')->name('user.profile');
+    Route::post('/user/changePassword', 'UserController@changePassword')->name('user.changePassword');
+    
 
 });

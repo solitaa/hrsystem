@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'name' => "Arev",
             'last_name' => "Arevyan",
             'email' => "arev@gmail.com",
-            'password' => bcrypt("as1234"),
+            'password' => Hash::make("as1234")
         ]);
     }
 }

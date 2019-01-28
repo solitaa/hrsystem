@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 use App\User;
 use Session;
 use Auth;
@@ -31,6 +33,21 @@ class UserController extends Controller
 
 
         $user = auth()->user();
+        return view('profile')->with([
+            'user'=> $user,
+            'employeeTypes' => $employeeTypes,
+            'employeeTypesDefault' => $employeeTypesDefault,
+        ]);
+    }
+
+
+    public function profile($id)
+    {
+        $employeeTypes = Company::find(1)->employeeTypes;
+        $employeeTypesDefault = EmployeeType::whereNull('company_id')->get();
+
+
+        $user = User::find($id);
         return view('profile')->with( [
             'user'=> $user,
             'employeeTypes' => $employeeTypes,
@@ -93,6 +110,35 @@ class UserController extends Controller
 
 
         //return redirect('/posts')->with('success', "post Updated");
+    }
+
+
+
+    public function changePassword(Request $request)
+    {
+        $user = auth()->user();
+
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        
+
+        if (Hash::check($request->currentpassword, $user->password)) {
+            $user->password = Hash::make($request->password);
+
+            $user->save();
+
+            Session::flash('success','Your password was updated.');
+        }
+        else {
+            Session::flash('info','Something went wrong.');
+        }
+        
+        return redirect()->back();
+
+
+
     }
     
 
@@ -186,12 +232,17 @@ class UserController extends Controller
 
 
 
+        if($request->hasFile('profile_image')){
+            $image = $request->profile_image;
+            $image_new_name = time().$image->getClientOriginalName();
 
+            $image->move('uploads/avatars', $image_new_name);
+            $user->profile_image = 'uploads/avatars/'.$image_new_name;
 
-
-
-
-
+        }
+        else {
+            $user->profile_image = 'uploads/avatars/profileImage.png';
+        }
 
         $user->save();
 

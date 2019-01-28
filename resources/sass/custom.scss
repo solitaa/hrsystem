@@ -13,3 +13,25 @@
   float: none;
   margin-bottom: 10px;
 }
+
+.inlineCard {
+  display: inline-block;
+  margin: 13px;
+}
+
+.displayInlineBlock {
+  display: inline-block;
+}
+
+a.displayInlineBlock {
+  float: right;
+}
+.container {
+  margin-top: 80px;
+}
+
+
+#changePassword {
+  cursor: pointer;
+  color: blue;
+}

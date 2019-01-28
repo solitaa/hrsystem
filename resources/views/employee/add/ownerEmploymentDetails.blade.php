@@ -1,0 +1,71 @@
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            {{ __('Employment Details') }}
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="start_date">{{ __('Start Date') }}</label>
+                    <input type="date" class="form-control {{ $errors->has('start_date') ? ' is-invalid' : '' }}" id="start_date"  name="start_date" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="employee_type">{{ __('Employee Type') }}</label>
+                    <select id="employee_type" name="employee_type_id" class="form-control">
+                        <option value="0">Select</option>
+                        @foreach($employeeTypesDefault as $employeeType)
+                            <option  value="{{$employeeType->id}}">{{$employeeType->name}}</option>
+                        @endforeach
+                        @foreach($employeeTypes as $employeeType)
+                            <option  value="{{$employeeType->id}}">{{$employeeType->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="work_email">{{ __('Work Email') }}</label>
+                    <input type="text" class=" form-control" id="work_email"  name="work_email" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="office_phone_number">{{ __('Office Phone Number') }}</label>
+                    <input type="text" class=" form-control" id="office_phone_number"  name="office_phone_number">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="manager">{{ __('Manager') }}</label>
+                    <select id="manager" name="manager" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="hrManager">{{ __('HR Manager') }}</label>
+                    <select id="hrManager" name="hrManager" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">{{ __('Employment Status') }}</label>
+                    <input type="text" class=" form-control{{ $errors->has('') ? ' is-invalid' : '' }}" id=""  name="" value="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">{{ __('Account Role') }}</label>
+                    <input type="text" class=" form-control{{ $errors->has('') ? ' is-invalid' : '' }}" id=""  name="" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">{{ __('Location') }}</label>
+                    <input type="text" class=" form-control{{ $errors->has('') ? ' is-invalid' : '' }}" id=""  name="" value="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">{{ __('Job Status') }}</label>
+                    <input type="text" class=" form-control{{ $errors->has('') ? ' is-invalid' : '' }}" id=""  name="" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

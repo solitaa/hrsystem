@@ -5,6 +5,15 @@
         </div>
         <div class="card-body">
             <div class="form-row">
+                <div class="card inlineCard" style="width: 7rem;">
+                    <img class="card-img-top" src="{{ asset($user->profile_image)}}" alt="Card image cap">
+                </div>
+                <div class="inlineCard">
+                    <label for="profile_image">Upload a new profile image.</label>
+                    <input type="file" class="form-control-file" name="profile_image" id="profile_image">
+                </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">{{ __('Name') }}</label>
                     <input type="text" class="form-control" id="name"  name="name" value="{{ $user->name }}">
@@ -20,8 +29,8 @@
                     <input type="text" class="form-control" id="username"  name="username" value="{{ $user->username }}">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="password">{{ __('Password') }}</label>
-                    <input type="password" class="form-control" id="password"  name="password" value="00000000"  disabled="disabled">
+                    <label for="passwordv">{{ __('Password') }} <span id="changePassword" data-toggle="modal" data-target="#exampleModal">Change</span></label>
+                    <input type="password" class="form-control" id="passwordv"  value="00000000"  disabled="disabled">
                 </div>
             </div>
             <div class="form-row">
@@ -50,3 +59,6 @@
         </div>
     </div>
 </div>
+
+
+
